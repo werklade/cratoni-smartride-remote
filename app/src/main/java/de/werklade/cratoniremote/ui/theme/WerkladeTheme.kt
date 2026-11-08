@@ -86,8 +86,7 @@ private val DarkScheme: ColorScheme = WerkladeColors.Dark.let { c ->
 private val LightScheme: ColorScheme = WerkladeColors.Light.let { c ->
     lightColorScheme(
         primary = c.accent,
-        // User decision 2026-11-08: white on #d9731a fails WCAG AA, so light deviates from token on-accent.
-        onPrimary = c.fgPrimary,
+        onPrimary = c.onAccent,
         primaryContainer = c.bgActive,
         onPrimaryContainer = c.fgPrimary,
         inversePrimary = WerkladeColors.Dark.accent,
