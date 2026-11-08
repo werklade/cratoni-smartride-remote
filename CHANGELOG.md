@@ -1,12 +1,13 @@
 # Changelog
 
 All notable changes to this project, newest first. Dates are the day the work was finished and
-verified on the test device (Samsung Galaxy S25 Ultra, Android 16, One UI 8.5).
+verified on the test device (Samsung Galaxy S25 Ultra, Android 16, One UI 8.5, unless a release
+names another device).
 
 Versions below 1.0.0 were never released. They are labels added afterwards, so that the steps the
 project went through can be told apart; the public history starts at 1.0.0.
 
-## Unreleased
+## 1.2.0 — 2026-11-08
 
 ### Added
 - `scripts/sync-design.ps1` copies the Werklade colour values from `../design`; `-Check` verifies
@@ -19,9 +20,18 @@ project went through can be told apart; the public history starts at 1.0.0.
   layer for Android themed icons.
 - The "connected" status card is neutral with a green border instead of a coloured fill; the
   battery gauge is green in the normal range.
-- In the light design, orange buttons carry dark text (contrast 4.5:1).
+- In the light design, orange buttons carry dark text (contrast 4.5:1). The slate for this text
+  comes from the Werklade tokens, not from a value local to the app.
 - "Set up" is a tinted button while permissions are missing, so a view shows at most one filled
   orange button.
+- README screenshots show 1.2.0 in the dark design; the 1.1.0 images are kept in
+  `docs/screenshots/1.1.0/`.
+
+### Fixed
+- While setup waits for a key press on the remote, the status card no longer shows the green
+  "connected" border; it appears only once the remote is confirmed.
+
+Verified on a Pixel 7 (Android 17).
 
 ## 1.1.0 — 2026-10-19
 

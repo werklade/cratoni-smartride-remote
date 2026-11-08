@@ -22,9 +22,11 @@ Dies ist ein privates, unabhängiges Projekt. Es besteht keine Verbindung zum He
 
 | Verbunden | Kurzanleitung | Nicht eingerichtet | Bestätigung beim Einrichten |
 |---|---|---|---|
-| ![Statuskarte mit Verbindung, Akkustand, Helm, Assistent und letztem Befehl](docs/screenshots/verbunden.png) | ![Karte „Kurzanleitung“ mit allen Tasten und dem, was kurzer und langer Druck auslösen](docs/screenshots/kurzanleitung.png) | ![Statuskarte ohne eingerichtete Fernbedienung, mit Knopf „Einrichten“](docs/screenshots/nicht-eingerichtet.png) | ![Karte „Remote bestätigen“ mit Gerätename, Restzeit und Abbrechen-Knopf](docs/screenshots/bestaetigung.png) |
+| ![Statuskarte mit Verbindung, Akkustand, Helm, Assistent und letztem Befehl](docs/screenshots/1.2.0/verbunden.png) | ![Karte „Kurzanleitung“ mit allen Tasten und dem, was kurzer und langer Druck auslösen](docs/screenshots/1.2.0/kurzanleitung.png) | ![Statuskarte ohne eingerichtete Fernbedienung, mit Knopf „Einrichten“](docs/screenshots/1.2.0/nicht-eingerichtet.png) | ![Karte „Remote bestätigen“ mit Gerätename, Restzeit und Abbrechen-Knopf](docs/screenshots/1.2.0/bestaetigung.png) |
 
-Der Gerätename im vierten Bild ist ein Beispiel; er wurde für die Veröffentlichung ersetzt. Das dritte Bild ist älter als die Assistenten-Zeile und zeigt sie deshalb nicht.
+Screenshots: Version 1.2.0, dunkles Design. Frühere Versionen: [1.1.0](docs/screenshots/1.1.0/).
+
+Der Gerätename im vierten Bild ist ein Beispiel; er wurde für die Veröffentlichung ersetzt.
 
 Die Screenshots zeigen die deutsche Oberfläche; auf einem Gerät mit englischer Sprache zeigt die App den englischen Wortlaut.
 
@@ -43,6 +45,7 @@ Die Screenshots zeigen die deutsche Oberfläche; auf einem Gerät mit englischer
 - Einrichtung über eine Geräteliste, bei der die gewählte Fernbedienung per Tastendruck bestätigt wird.
 - Tastenlegende in der App: eine dauerhaft sichtbare Karte am Ende des Hauptbildschirms („Was die Tasten tun“), die diese Belegung im Gerät selbst erklärt, einschließlich kurzem und langem Druck der Lautstärketasten, dazu zwei Fußnoten (die Lichttasten wirken nur mit verbundenem Helm; die Anruf-Taste bleibt bei WhatsApp-Anrufen wirkungslos). Sie bleibt sichtbar, wenn keine Fernbedienung eingerichtet ist, und ist ausgeblendet, solange beim Einrichten eine Bestätigung läuft.
 - Sprache: Die App folgt der Systemsprache (siehe Voraussetzungen).
+- Design: Die App folgt der Systemeinstellung für dunkel oder hell (Werklade-Design: Schieferflächen, oranger Akzent). Das App-Symbol zeigt einen Fahrradhelm.
 
 ## Voraussetzungen
 
@@ -75,7 +78,7 @@ Zum Bauen: Alle Angaben aus `app/build.gradle.kts` und `gradle/libs.versions.tom
 
 ## Bauen und installieren
 
-Fertige Fassung: Unter „Releases“ des GitHub-Repositories liegt eine signierte Fassung (v1.1.0). Alternativ lässt sich die App selbst bauen (siehe unten). Wer selbst baut und signiert, erzeugt eine andere Signatur; eine Fassung aus „Releases“ lässt sich dann nicht darüber aktualisieren und umgekehrt.
+Fertige Fassung: Unter „Releases“ des GitHub-Repositories liegt eine signierte Fassung (v1.2.0). Alternativ lässt sich die App selbst bauen (siehe unten). Wer selbst baut und signiert, erzeugt eine andere Signatur; eine Fassung aus „Releases“ lässt sich dann nicht darüber aktualisieren und umgekehrt.
 
 Was sich zwischen den Fassungen geändert hat, steht in [CHANGELOG.md](CHANGELOG.md) — einschließlich der Schritte vor der ersten Veröffentlichung. Das Änderungsprotokoll ist auf Englisch.
 

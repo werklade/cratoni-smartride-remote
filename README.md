@@ -22,9 +22,11 @@ This is a private, independent project. It has no connection to the helmet's man
 
 | Connected | Quick reference | Not set up | Confirmation during setup |
 |---|---|---|---|
-| ![Status card showing connection, battery level, helmet, assistant and last command](docs/screenshots/verbunden.png) | ![Card "Kurzanleitung" (Quick reference) listing every button with what a short and a long press do](docs/screenshots/kurzanleitung.png) | ![Status card without a configured remote, with a "Einrichten" (Set up) button](docs/screenshots/nicht-eingerichtet.png) | ![Card "Remote bestätigen" (Confirm remote) with device name, remaining time and a cancel button](docs/screenshots/bestaetigung.png) |
+| ![Status card showing connection, battery level, helmet, assistant and last command](docs/screenshots/1.2.0/verbunden.png) | ![Card "Kurzanleitung" (Quick reference) listing every button with what a short and a long press do](docs/screenshots/1.2.0/kurzanleitung.png) | ![Status card without a configured remote, with a "Einrichten" (Set up) button](docs/screenshots/1.2.0/nicht-eingerichtet.png) | ![Card "Remote bestätigen" (Confirm remote) with device name, remaining time and a cancel button](docs/screenshots/1.2.0/bestaetigung.png) |
 
-The device name in the fourth image is an example; it was replaced for publication. The third image is older than the assistant row and does not show it.
+Screenshots: version 1.2.0, dark theme. Earlier versions: [1.1.0](docs/screenshots/1.1.0/).
+
+The device name in the fourth image is an example; it was replaced for publication.
 
 The screenshots show the German interface; on a device set to English the app shows the English wording.
 
@@ -43,6 +45,7 @@ The screenshots show the German interface; on a device set to English the app sh
 - Setup through a device list, where the chosen remote is confirmed with a button press.
 - Button legend in the app: a permanently visible card at the bottom of the main screen ("What the buttons do", in German "Was die Tasten tun") that explains this mapping on the device itself, including the short and long press of the volume keys and two footnotes (the light buttons only work with the helmet connected; the call button has no effect for WhatsApp calls). It stays visible when no remote is set up and is hidden while a confirmation is running during setup.
 - Language: the app follows the system language (see Requirements).
+- Design: the app follows the system setting for dark or light (Werklade design: slate surfaces, orange accent). The app icon shows a bicycle helmet.
 
 ## Requirements
 
@@ -75,7 +78,7 @@ To build the app: all values are taken from `app/build.gradle.kts` and `gradle/l
 
 ## Building and installing
 
-Prebuilt version: a signed build (v1.1.0) is available under "Releases" in the GitHub repository. Alternatively, build the app yourself (see below). A build you sign yourself carries a different signature, so a version from "Releases" cannot be updated in place with it, and the other way round.
+Prebuilt version: a signed build (v1.2.0) is available under "Releases" in the GitHub repository. Alternatively, build the app yourself (see below). A build you sign yourself carries a different signature, so a version from "Releases" cannot be updated in place with it, and the other way round.
 
 What changed between releases is listed in [CHANGELOG.md](CHANGELOG.md), including the steps before the first public one.
 

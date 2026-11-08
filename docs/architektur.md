@@ -426,7 +426,7 @@ Die GATT-Statuscodes stehen weiterhin im Log, nicht mehr in der Benachrichtigung
 
 **Regel für String-Ressourcen (Ergänzung zur Anmerkung weiter oben):** Auch die englische Grundfassung verwendet typografische Apostrophe und Anführungszeichen (U+2018/U+2019, U+201C/U+201D), weil AAPT einen geraden Apostroph verschluckt, sofern er nicht maskiert ist (so im Kopfkommentar von `values/strings.xml`).
 
-**Dokumentation:** Die Screenshots im README zeigen weiterhin die deutsche Oberfläche; Alle drei Bilder (angesehen) sind oberhalb der Tastenlegende abgeschnitten, die Legende ist also auf keinem Screenshot zu sehen. `nicht-eingerichtet.png` zeigt außerdem die Zeile „Zuständiger Assistent“ nicht (A1, 17.10.2026); ob das Bild älter ist als A1 oder die Zeile in diesem Zustand fehlt, wurde nicht geprüft.
+**Dokumentation:** Die Screenshots von 1.1.0 liegen unverändert in `docs/screenshots/1.1.0/`, die von 1.2.0 (dunkles Design, deutsche Oberfläche) in `docs/screenshots/1.2.0/`.
 
 ### Gerätetest vom 23.10.2026 (Pixel 7, Android 17)
 
@@ -503,7 +503,7 @@ Der erste Abschnitt ist umgesetzt (16.10.2026), einschließlich der Anzeige des 
 - Aus dem Stand vom 19.10.2026 (§2, §11), alles am Gerät ungeprüft: Sprachumschaltung je App, Benachrichtigung in Englisch samt Neuaufbau bei Sprachwechsel, Tastenlegende bei großer Schrift und mit TalkBack.
 - Zeitformat nach dem 12/24-Stunden-Schalter der Systemeinstellungen: bekannte Grenze; bräuchte einen `Context` in der Formatierungsschicht (§2). Nicht geplant.
 - Weitere Sprachen: Es gibt nur Englisch und Deutsch. Eine weitere Sprache bräuchte einen Ordner `values-xx` und einen `<locale>`-Eintrag in `res/xml/locales_config.xml`; ohne den Eintrag bietet die Sprachliste der App sie nicht an (aus der Funktion der Datei geschlossen, nicht ausprobiert).
-- Screenshots im README: zeigen nur die deutsche Oberfläche und sind oberhalb der Tastenlegende abgeschnitten; eine englische Fassung und ein Bild mit Legende fehlen.
+- Screenshots im README: 1.2.0 in `docs/screenshots/1.2.0/` (dunkles Design); eine englische Fassung und Bilder im hellen Design fehlen.
 
 **Folgen für die beiden nächsten Ideen** (Push-to-Talk, Mikrofon stummschalten): Sie waren für dieselbe Taste gedacht und stehen jetzt im Konflikt mit deren Belegung. Sie bleiben als Hintergrund und als mögliche spätere Erweiterung stehen; eine Umsetzung bräuchte eine andere Taste oder eine umschaltbare Belegung. Hinzu kommt: Die Sperre bei `MODE_IN_COMMUNICATION` betrifft genau die Intercom-Apps, für die PTT gedacht war — die Taste tut dort derzeit nichts.
 

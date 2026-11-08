@@ -464,8 +464,15 @@ private fun statusContainerColor(remoteConfigured: Boolean, state: RemoteState):
     else -> MaterialTheme.colorScheme.surfaceVariant
 }
 
-private fun isConnectedAndConfigured(remoteConfigured: Boolean, state: RemoteState): Boolean =
-    remoteConfigured && !state.waitingForBluetooth && state.connection == BleConnectionState.Connected
+/**
+ * True only for a confirmed, connected remote. While a key press is still awaited ([RemoteState.pendingConfirmation])
+ * the link is up but nothing is confirmed yet, so the card must not look successful.
+ */
+internal fun isConnectedAndConfigured(remoteConfigured: Boolean, state: RemoteState): Boolean =
+    remoteConfigured &&
+        state.pendingConfirmation == null &&
+        !state.waitingForBluetooth &&
+        state.connection == BleConnectionState.Connected
 
 /**
  * Battery level as a drawn symbol plus the value in words, e.g. "60 % (3,74 V)", and below it when the value was

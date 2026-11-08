@@ -41,8 +41,8 @@ android {
         targetSdk = 36
         // versionCode must increase with every published release; Android refuses to
         // install an update whose versionCode is not higher than the installed one.
-        versionCode = 2
-        versionName = "1.1.0"
+        versionCode = 3
+        versionName = "1.2.0"
     }
 
     signingConfigs {
