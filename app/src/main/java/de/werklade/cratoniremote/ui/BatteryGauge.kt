@@ -2,7 +2,6 @@ package de.werklade.cratoniremote.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -11,8 +10,6 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,6 +25,8 @@ import androidx.compose.ui.unit.sp
 import de.werklade.cratoniremote.R
 import de.werklade.cratoniremote.ble.RemoteBattery
 import de.werklade.cratoniremote.data.RemoteStatusText
+import de.werklade.cratoniremote.ui.theme.WerkladeTheme
+import de.werklade.cratoniremote.ui.theme.statusColors
 
 /** Segments of the gauge; ten, so one segment stands for the ten percent steps the remote reports. */
 internal const val BATTERY_SEGMENTS = 10
@@ -66,8 +65,9 @@ internal fun filledBatterySegments(percent: Int?): Int {
  * [LocalDensity], so the symbol grows with the system font scale instead of being cut off at a fixed height.
  *
  * Colours come from the Material 3 scheme: the frame from [LocalContentColor] (the content colour of the card it
- * sits in, therefore readable in light and dark mode), the filling from `primary` and from `error` at
- * [BATTERY_LOW_PERCENT] or less.
+ * sits in, therefore readable in light and dark mode), the filling from the Werklade success colour and from
+ * `error` at [BATTERY_LOW_PERCENT] or less. Not `primary`: the orange accent is meant for active elements, and the
+ * light-theme orange has only about 2.8:1 against the card.
  *
  * Deliberately without a `contentDescription`, i.e. decorative: the text next to it carries the same information
  * as words ("60 % (3,74 V)"), and the row around both is a merged semantics node. A description here would make
@@ -81,7 +81,7 @@ fun BatteryGauge(percent: Int?, modifier: Modifier = Modifier) {
     val fillColor = if (percent != null && percent <= BATTERY_LOW_PERCENT) {
         MaterialTheme.colorScheme.error
     } else {
-        MaterialTheme.colorScheme.primary
+        MaterialTheme.statusColors.success
     }
     val outlineColor = LocalContentColor.current
     val emptyColor = outlineColor.copy(alpha = EMPTY_SEGMENT_ALPHA)
@@ -131,8 +131,7 @@ fun BatteryGauge(percent: Int?, modifier: Modifier = Modifier) {
 
 @Composable
 private fun GaugePreview(battery: RemoteBattery?) {
-    val colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()
-    MaterialTheme(colorScheme = colorScheme) {
+    WerkladeTheme {
         Surface {
             Row(
                 modifier = Modifier.padding(16.dp),

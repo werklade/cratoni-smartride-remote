@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Werklade Hell: bg-content, the Compose `background` of WerkladeTheme (ui/theme). Keep in sync with
+         WerkladeColors.Light.bgContent; values-night/colors.xml has the dark counterpart. -->
+    <color name="werklade_window_background">#FFFFFF</color>
+</resources>

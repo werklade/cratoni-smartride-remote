@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Werklade Dunkel: bg-content, the Compose `background` of WerkladeTheme (ui/theme). Keep in sync with
+         WerkladeColors.Dark.bgContent. -->
+    <color name="werklade_window_background">#141B22</color>
+</resources>

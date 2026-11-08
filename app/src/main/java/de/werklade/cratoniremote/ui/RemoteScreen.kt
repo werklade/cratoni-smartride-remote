@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.res.Configuration
 import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -19,6 +18,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -26,8 +26,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.contentColorFor
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
@@ -71,6 +69,9 @@ import de.werklade.cratoniremote.helmet.HelmetFailure
 import de.werklade.cratoniremote.helmet.HelmetLights
 import de.werklade.cratoniremote.helmet.RearLight
 import de.werklade.cratoniremote.protocol.RemoteCommand
+import de.werklade.cratoniremote.ui.theme.WerkladeButtonShape
+import de.werklade.cratoniremote.ui.theme.WerkladeTheme
+import de.werklade.cratoniremote.ui.theme.statusColors
 
 /**
  * Status and setup screen (docs/architektur.md §10, step 6).
@@ -165,7 +166,7 @@ fun RemoteScreen(
         if (missingPermissionNames.isNotEmpty()) {
             val names = missingPermissionNames.map { permissionLabel(it) }.joinToString(", ")
             Text(text = stringResource(R.string.permissions_missing, names))
-            Button(onClick = onRequestPermissions, modifier = Modifier.fillMaxWidth()) {
+            Button(shape = WerkladeButtonShape, onClick = onRequestPermissions, modifier = Modifier.fillMaxWidth()) {
                 Text(text = stringResource(R.string.action_request_permissions))
             }
         }
@@ -174,8 +175,16 @@ fun RemoteScreen(
         if (pendingConfirmation == null) {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 if (!remoteConfigured) {
-                    Button(onClick = onSetUp, modifier = Modifier.fillMaxWidth()) {
-                        Text(text = stringResource(R.string.action_set_up))
+                    // At most one orange-filled button per view: the permission button above takes it while
+                    // permissions are missing, as pairing needs them first.
+                    if (missingPermissionNames.isEmpty()) {
+                        Button(shape = WerkladeButtonShape, onClick = onSetUp, modifier = Modifier.fillMaxWidth()) {
+                            Text(text = stringResource(R.string.action_set_up))
+                        }
+                    } else {
+                        FilledTonalButton(shape = WerkladeButtonShape, onClick = onSetUp, modifier = Modifier.fillMaxWidth()) {
+                            Text(text = stringResource(R.string.action_set_up))
+                        }
                     }
                     if (setupFailed) {
                         Text(
@@ -186,7 +195,9 @@ fun RemoteScreen(
                     }
                 } else {
                     OutlinedButton(
+                        shape = WerkladeButtonShape,
                         onClick = { showForgetConfirmation = true },
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onSurface),
                         modifier = Modifier.fillMaxWidth(),
                     ) { Text(text = stringResource(R.string.action_forget)) }
                 }
@@ -222,14 +233,20 @@ fun RemoteScreen(
             text = { Text(text = stringResource(R.string.forget_confirm_message)) },
             confirmButton = {
                 TextButton(
+                    shape = WerkladeButtonShape,
                     onClick = {
                         showForgetConfirmation = false
                         onForget()
                     },
+                    colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error),
                 ) { Text(text = stringResource(R.string.forget_confirm_confirm)) }
             },
             dismissButton = {
-                TextButton(onClick = { showForgetConfirmation = false }) {
+                TextButton(
+                    shape = WerkladeButtonShape,
+                    onClick = { showForgetConfirmation = false },
+                    colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.onSurface),
+                ) {
                     Text(text = stringResource(R.string.forget_confirm_cancel))
                 }
             },
@@ -331,6 +348,7 @@ private fun ConfirmationCard(
                 style = MaterialTheme.typography.bodySmall,
             )
             OutlinedButton(
+                shape = WerkladeButtonShape,
                 onClick = onCancel,
                 modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp),
                 colors = ButtonDefaults.outlinedButtonColors(contentColor = contentColor),
@@ -399,9 +417,16 @@ private fun StatusOverviewCard(
     modifier: Modifier = Modifier,
 ) {
     val containerColor = statusContainerColor(remoteConfigured, state)
+    // "Connected" is marked by a success-green edge, not by a fill; the state is also in words (StatusRow).
+    val border = if (isConnectedAndConfigured(remoteConfigured, state)) {
+        BorderStroke(2.dp, MaterialTheme.statusColors.success)
+    } else {
+        null
+    }
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = containerColor, contentColor = contentColorFor(containerColor)),
+        border = border,
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -426,7 +451,8 @@ private fun StatusOverviewCard(
 }
 
 /**
- * Errors and the healthy "connected" state get their own colour; every other state stays neutral.
+ * Errors colour the card; the healthy "connected" state keeps the neutral card and gets a success-green edge
+ * instead ([isConnectedAndConfigured]). Every other state stays neutral.
  *
  * Without a set up remote the connection state says nothing: a [BleConnectionState.Failed] left over from an
  * earlier session would colour the card red next to the line "Nicht eingerichtet".
@@ -435,10 +461,11 @@ private fun StatusOverviewCard(
 private fun statusContainerColor(remoteConfigured: Boolean, state: RemoteState): Color = when {
     !remoteConfigured -> MaterialTheme.colorScheme.surfaceVariant
     state.connection is BleConnectionState.Failed -> MaterialTheme.colorScheme.errorContainer
-    !state.waitingForBluetooth && state.connection == BleConnectionState.Connected ->
-        MaterialTheme.colorScheme.primaryContainer
     else -> MaterialTheme.colorScheme.surfaceVariant
 }
+
+private fun isConnectedAndConfigured(remoteConfigured: Boolean, state: RemoteState): Boolean =
+    remoteConfigured && !state.waitingForBluetooth && state.connection == BleConnectionState.Connected
 
 /**
  * Battery level as a drawn symbol plus the value in words, e.g. "60 % (3,74 V)", and below it when the value was
@@ -499,8 +526,8 @@ private fun AssistantRow(
         AssistantTarget.AskedOnPress -> stringResource(R.string.assistant_asked_on_press)
         is AssistantTarget.App -> target.label
     }
-    // The card's content colour, so the outlined button carries the container role of the card instead of the
-    // theme's primary, which does not hold against primaryContainer or errorContainer.
+    // The card uses a neutral surface with a success border when connected; the outlined button follows
+    // its content colour instead of the theme's primary.
     val contentColor = LocalContentColor.current
 
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -517,6 +544,7 @@ private fun AssistantRow(
             valueMaxLines = 2,
         )
         OutlinedButton(
+            shape = WerkladeButtonShape,
             onClick = { settingsMissing = !onOpenSettings() },
             modifier = Modifier
                 .heightIn(min = 48.dp)
@@ -887,8 +915,7 @@ private fun PreviewScreen(
     confirmationRemainingSeconds: Int = 0,
     assistantTarget: AssistantTarget? = PREVIEW_ASSISTANT_APP,
 ) {
-    val colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()
-    MaterialTheme(colorScheme = colorScheme) {
+    WerkladeTheme {
         RemoteScreen(
             bluetoothEnabled = true,
             remoteConfigured = remoteConfigured,
@@ -1007,8 +1034,7 @@ private fun PreviewAssistantPendingDark() =
 
 @Composable
 private fun PreviewLegend() {
-    val colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()
-    MaterialTheme(colorScheme = colorScheme) {
+    WerkladeTheme {
         Column(modifier = Modifier.padding(16.dp)) { ButtonLegendCard() }
     }
 }

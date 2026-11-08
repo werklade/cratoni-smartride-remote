@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Placeholder launcher foreground: ring with play symbol inside the 66dp safe zone. -->
+<!-- Werklade product logo (werklade/design logo/cratoni-remote-logo.svg) scaled into the 66dp safe zone; the background layer is slate #1f2933. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path
-        android:fillColor="#00000000"
-        android:pathData="M54,30a24,24 0,1 1,0 48a24,24 0,1 1,0 -48z"
-        android:strokeWidth="4"
-        android:strokeColor="#FFFFFFFF" />
-    <path
-        android:fillColor="#FFFFFFFF"
-        android:pathData="M48,42L67,54L48,66Z" />
+    <group
+        android:scaleX="0.32"
+        android:scaleY="0.32"
+        android:translateX="22"
+        android:translateY="21.36">
+        <path
+            android:pathData="M38,28 H162 A8,8 0 0 1 170,36 V124 A8,8 0 0 1 162,132 H38 A8,8 0 0 1 30,124 V36 A8,8 0 0 1 38,28 Z"
+            android:fillColor="#FFF08A24"/>
+        <path
+            android:pathData="M58,100 C56,70 78,54 104,54 C128,54 143,70 143,92 L124,98 C118,84 102,84 96,98 Z"
+            android:fillColor="#00000000"
+            android:strokeColor="#FF1F2933"
+            android:strokeWidth="14"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"/>
+        <path
+            android:pathData="M98,98 L114,107 L119,116"
+            android:fillColor="#00000000"
+            android:strokeColor="#FF1F2933"
+            android:strokeWidth="14"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"/>
+        <path
+            android:pathData="M36,144 H164 A6,6 0 0 1 170,150 V170 A6,6 0 0 1 164,176 H36 A6,6 0 0 1 30,170 V150 A6,6 0 0 1 36,144 Z"
+            android:fillColor="#00000000"
+            android:strokeColor="#FFE4E7EB"
+            android:strokeWidth="7"/>
+        <path
+            android:pathData="M82,160 H118"
+            android:fillColor="#00000000"
+            android:strokeColor="#FFE4E7EB"
+            android:strokeWidth="6"
+            android:strokeLineCap="round"/>
+    </group>
 </vector>

@@ -21,13 +21,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -54,6 +50,7 @@ import de.werklade.cratoniremote.data.PendingConfirmation
 import de.werklade.cratoniremote.data.RemoteStatus
 import de.werklade.cratoniremote.service.RemoteConnectionService
 import de.werklade.cratoniremote.service.shouldStartConnectionService
+import de.werklade.cratoniremote.ui.theme.WerkladeTheme
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -76,10 +73,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            // Follows the system setting; themes.xml/values-night keep the platform theme (status/navigation
-            // bar icon contrast via enableEdgeToEdge()) in sync with this Compose colour scheme.
-            val colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()
-            MaterialTheme(colorScheme = colorScheme) {
+            // Follows the system setting; themes.xml/values-night keep the platform theme (window background,
+            // status/navigation bar icon contrast via enableEdgeToEdge()) in sync with this Compose colour scheme.
+            WerkladeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     RemoteRoute(modifier = Modifier.padding(innerPadding))
                 }

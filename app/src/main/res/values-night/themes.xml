@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Dark counterpart of values/themes.xml (manual DayNight, no AppCompat). Same style name, different
-         platform parent, selected automatically by the system's night mode via this -night qualifier. -->
-    <style name="Theme.CratoniRemote" parent="android:Theme.Material.NoActionBar" />
+         platform parent, selected automatically by the system's night mode via this -night qualifier.
+         windowBackground uses the matching colour from values-night/colors.xml. -->
+    <style name="Theme.CratoniRemote" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/werklade_window_background</item>
+    </style>
 </resources>

@@ -6,6 +6,23 @@ verified on the test device (Samsung Galaxy S25 Ultra, Android 16, One UI 8.5).
 Versions below 1.0.0 were never released. They are labels added afterwards, so that the steps the
 project went through can be told apart; the public history starts at 1.0.0.
 
+## Unreleased
+
+### Added
+- `scripts/sync-design.ps1` copies the Werklade colour values from `../design`; `-Check` verifies
+  the copy. A unit test compares the Kotlin colours with the tokens.
+
+### Changed
+- The UI uses the Werklade design: dark and light follow the system setting; surfaces in slate
+  steps, orange only as an accent; buttons with a 4 dp corner radius.
+- New app icon on the Werklade product grid: a bicycle helmet in the orange drawer, with its own
+  layer for Android themed icons.
+- The "connected" status card is neutral with a green border instead of a coloured fill; the
+  battery gauge is green in the normal range.
+- In the light design, orange buttons carry dark text (contrast 4.5:1).
+- "Set up" is a tinted button while permissions are missing, so a view shows at most one filled
+  orange button.
+
 ## 1.1.0 — 2026-10-19
 
 ### Added

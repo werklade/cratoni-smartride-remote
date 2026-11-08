@@ -3,6 +3,10 @@
     <!-- Platform theme without action bar; Compose draws the UI. No AppCompat, so DayNight is done manually:
          this is the light variant, values-night/themes.xml overrides it with the dark platform theme. Needed
          so enableEdgeToEdge() (MainActivity) picks status/navigation bar icon contrast matching the actual
-         (light/dark) background instead of defaulting to light icons on a light background at night. -->
-    <style name="Theme.CratoniRemote" parent="android:Theme.Material.Light.NoActionBar" />
+         (light/dark) background instead of defaulting to light icons on a light background at night.
+         windowBackground is the Werklade background (colors.xml), identical to the Compose background, so the
+         first frame before Compose draws does not flash a different colour. -->
+    <style name="Theme.CratoniRemote" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/werklade_window_background</item>
+    </style>
 </resources>
